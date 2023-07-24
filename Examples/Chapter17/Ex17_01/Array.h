@@ -34,8 +34,9 @@ Array<T>::Array(size_t arraySize) :  size{arraySize}, elements{new T[arraySize]}
 template<typename T>
 Array<T>::Array(const Array &array) : Array{array.size} {
     std::cout << "Array of " << size << " elements copied" << std::endl;
-    for (size_t i{}; i < size; ++i)
+    for (size_t i{}; i < size; ++i) {
         elements[i] = array.elements[i];
+    }
 }
 
 // Destructor
@@ -47,8 +48,9 @@ Array<T>::~Array() {
 // const subscript operator
 template<typename T>
 const T &Array<T>::operator[](size_t index) const {
-    if (index >= size)
+    if (index >= size) {
         throw std::out_of_range{"Index too large: " + std::to_string(index)};
+    }
 
     return elements[index];
 }
