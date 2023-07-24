@@ -1,0 +1,1 @@
+add_executable(Ex6_07 Ex6_07.cpp)
