@@ -9,7 +9,7 @@ int main() {
     box.showVolume();                             // Display volume of base box
     hardcase.showVolume();                        // Display volume of derived box
 
-    //std::cout << "hardcase volume is " << hardcase.volume() << std::endl;
-    //Box *pBox {&hardcase};
-    //std::cout << "hardcase volume through pBox is " << pBox->volume() << std::endl;
+    std::cout << "hardcase volume is " << hardcase.volume() << std::endl;
+    Box *pBox{&hardcase};
+    std::cout << "hardcase volume through pBox is " << pBox->volume() << std::endl;
 }
