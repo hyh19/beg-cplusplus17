@@ -5,55 +5,56 @@
 #include "Carton.h"
 
 // Define trivial non-polymorphic base and derived classes:
-class NonPolyBase {};
-class NonPolyDerived : public NonPolyBase {};
+class NonPolyBase {
+};
 
-Box& GetSomeBox();              // Function returning a reference to a polymorphic type
-NonPolyBase& GetSomeNonPoly();  // Function returning a reference to a non-polymorphic type
+class NonPolyDerived : public NonPolyBase {
+};
 
-int main()
-{
-  // Part 1: typeid() on types and == operator
-  std::cout << "Type double has name " << typeid(double).name() << std::endl;
-  std::cout << "1 is " << (typeid(1) == typeid(int)? "an int" : "no int") << std::endl;
+Box &GetSomeBox();              // Function returning a reference to a polymorphic type
+NonPolyBase &GetSomeNonPoly();  // Function returning a reference to a non-polymorphic type
 
-  // Part 2: typeid() on polymorphic references
-  Carton carton{ 1, 2, 3, "paperboard" };
-  Box& boxReference = carton;
-  
-  std::cout << "Type of carton is "       << typeid(carton).name()       << std::endl;
-  std::cout << "Type of boxReference is " << typeid(boxReference).name() << std::endl;
-  std::cout << "These are " << (typeid(carton) == typeid(boxReference)? "" : "not ") 
-            << "equal" << std::endl;
+int main() {
+    // Part 1: typeid() on types and == operator
+    std::cout << "Type double has name " << typeid(double).name() << std::endl;
+    std::cout << "1 is " << (typeid(1) == typeid(int) ? "an int" : "no int") << std::endl;
 
-  // Part 3: typeid() on polymorphic pointers
-  Box* boxPointer = &carton;
-  std::cout << "Type of &carton is "     << typeid(&carton).name()     << std::endl;
-  std::cout << "Type of boxPointer is "  << typeid(boxPointer).name()  << std::endl;
-  std::cout << "Type of *boxPointer is " << typeid(*boxPointer).name() << std::endl;
+    // Part 2: typeid() on polymorphic references
+    Carton carton{1, 2, 3, "paperboard"};
+    Box &boxReference = carton;
 
-  // Part 4: typeid() with non-polymorphic classes
-  NonPolyDerived derived;
-  NonPolyBase& baseRef = derived;
+    std::cout << "Type of carton is " << typeid(carton).name() << std::endl;
+    std::cout << "Type of boxReference is " << typeid(boxReference).name() << std::endl;
+    std::cout << "These are " << (typeid(carton) == typeid(boxReference) ? "" : "not ")
+              << "equal" << std::endl;
 
-  std::cout << "Type of baseRef is " << typeid(baseRef).name() << std::endl;
+    // Part 3: typeid() on polymorphic pointers
+    Box *boxPointer = &carton;
+    std::cout << "Type of &carton is " << typeid(&carton).name() << std::endl;
+    std::cout << "Type of boxPointer is " << typeid(boxPointer).name() << std::endl;
+    std::cout << "Type of *boxPointer is " << typeid(*boxPointer).name() << std::endl;
 
-  // Part 5: typeid() on expressions
-  const auto& type_info1 = typeid(GetSomeBox());       // function call evaluated
-  const auto& type_info2 = typeid(GetSomeNonPoly());   // function call not evaluated
-  std::cout << "Type of GetSomeBox() is " << type_info1.name() << std::endl;
-  std::cout << "Type of GetSomeNonPoly() is "    << type_info2.name() << std::endl;
+    // Part 4: typeid() with non-polymorphic classes
+    NonPolyDerived derived;
+    NonPolyBase &baseRef = derived;
+
+    std::cout << "Type of baseRef is " << typeid(baseRef).name() << std::endl;
+
+    // Part 5: typeid() on expressions
+    const auto &type_info1 = typeid(GetSomeBox());       // function call evaluated
+    const auto &type_info2 = typeid(GetSomeNonPoly());   // function call not evaluated
+    std::cout << "Type of GetSomeBox() is " << type_info1.name() << std::endl;
+    std::cout << "Type of GetSomeNonPoly() is " << type_info2.name() << std::endl;
 }
 
-Box& GetSomeBox()
-{
-  std::cout << "GetSomeBox() called..." << std::endl;
-  static Carton carton{ 2, 3, 5, "duplex" }; 
-  return carton;
+Box &GetSomeBox() {
+    std::cout << "GetSomeBox() called..." << std::endl;
+    static Carton carton{2, 3, 5, "duplex"};
+    return carton;
 }
-NonPolyBase& GetSomeNonPoly()
-{
-  std::cout << "GetSomeNonPoly() called..." << std::endl;
-  static NonPolyDerived derived; 
-  return derived;
+
+NonPolyBase &GetSomeNonPoly() {
+    std::cout << "GetSomeNonPoly() called..." << std::endl;
+    static NonPolyDerived derived;
+    return derived;
 }
