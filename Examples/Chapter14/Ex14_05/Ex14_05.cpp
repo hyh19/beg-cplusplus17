@@ -5,18 +5,16 @@
 #include "Carton.h"                              // For the Carton class
 
 // Global function to display the volume of a box
-void showVolume(const Box& rBox)
-{ 
-  std::cout << "Box usable volume is " << rBox.volume() << std::endl;
+void showVolume(const Box &rBox) {
+    std::cout << "Box usable volume is " << rBox.volume() << std::endl;
 }
 
-int main()
-{
-  Box box {20.0, 30.0, 40.0};                    // A base box
-  ToughPack hardcase {20.0, 30.0, 40.0};         // A derived box - same size
-  Carton carton {20.0, 30.0, 40.0, "plastic"};   // A different derived box
+int main() {
+    Box box{20.0, 30.0, 40.0};                    // A base box
+    ToughPack hardcase{20.0, 30.0, 40.0};         // A derived box - same size
+    Carton carton{20.0, 30.0, 40.0, "plastic"};   // A different derived box
 
-  showVolume(box);                               // Display volume of base box
-  showVolume(hardcase);                          // Display volume of derived box
-  showVolume(carton);                            // Display volume of derived box
+    showVolume(box);                               // Display volume of base box
+    showVolume(hardcase);                          // Display volume of derived box
+    showVolume(carton);                            // Display volume of derived box
 }
