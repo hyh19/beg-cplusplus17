@@ -4,28 +4,28 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include <stdexcept>                        // For standard exception types
-#include <string>                           // For std::to_string()
-#include <utility>                          // For std::as_const()
-#include <iostream>                         // For std::cout (used for debugging output)
+#include <stdexcept>                          // For standard exception types
+#include <string>                             // For std::to_string()
+#include <utility>                            // For std::as_const()
+#include <iostream>                           // For std::cout (used for debugging output)
 
 template<typename T>
 class Array {
 private:
     T *elements;                              // Array of type T
-    size_t size;                              // Number of array elements
+    size_t size{};                            // Number of array elements
 
 public:
     explicit Array(size_t arraySize = 0);     // Constructor
     Array(const Array &array);                // Copy constructor
-    Array(Array &&array);                     // Move constructor
+    Array(Array &&array) noexcept;            // Move constructor
     ~Array();                                 // Destructor
     Array &operator=(const Array &rhs);       // Copy assignment operator
-    Array &operator=(Array &&rhs);            // Move assignment operator
-    void push_back(T value);                  // Add a new element (copied or moved!)
+    Array &operator=(Array &&rhs) noexcept;   // Move assignment operator
+    void push_back(T element);                // Add a new element (copied or moved!)
     T &operator[](size_t index);              // Subscript operator
     const T &operator[](size_t index) const;  // Subscript operator-const arrays
-    size_t getSize() const { return size; }   // Accessor for size
+    [[nodiscard]] size_t getSize() const { return size; }   // Accessor for size
     void swap(Array &other) noexcept;         // noexcept swap member function
 };
 
@@ -51,10 +51,10 @@ Array<T>::Array(const Array &array) : Array{array.size} {
 
 // Move constructor
 template<typename T>
-Array<T>::Array(Array &&moved)
-        : size{moved.size}, elements{moved.elements} {
+Array<T>::Array(Array &&array)
+noexcept         : size{array.size}, elements{array.elements} {
     std::cout << "Array of " << size << " elements moved" << std::endl;
-    moved.elements = nullptr;          // Prevent moved from calling delete[] on elements
+    array.elements = nullptr;          // Prevent array from calling delete[] on elements
 }
 
 // Destructor
@@ -99,14 +99,16 @@ void Array<T>::push_back(T element)      // Pass by value (copy of lvalue, or mo
 // Uses the 'copy-and-swap' idiom.
 template<typename T>
 Array<T> &Array<T>::operator=(const Array &rhs) {
-    Array<T> copy{rhs};       // Copy ...       (could go wrong and throw an exception)
-    swap(copy);               // ... and swap!  (noexcept)
-    return *this;             // Return lhs
+    if (this != &rhs) {
+        Array<T> copy{rhs};       // Copy ...       (could go wrong and throw an exception)
+        swap(copy);               // ... and swap!  (noexcept)
+    }
+    return *this;                 // Return lhs
 }
 
 // Move assignment operator
 template<typename T>
-Array<T> &Array<T>::operator=(Array &&rhs) {
+Array<T> &Array<T>::operator=(Array &&rhs) noexcept {
     std::cout << "Array of " << rhs.size << " elements moved (assignment)" << std::endl;
 
     if (this != &rhs) {            // prevent trouble with self-assignments
