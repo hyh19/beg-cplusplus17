@@ -20,3 +20,5 @@ add_executable(Ex17_01 Examples/Chapter17/Ex17_01/Ex17_01.cpp)
 add_executable(Ex17_02 Examples/Chapter17/Ex17_02/Ex17_02.cpp)
 add_executable(Ex17_03 Examples/Chapter17/Ex17_03/Ex17_03.cpp)
 add_executable(Ex17_04 Examples/Chapter17/Ex17_04/Ex17_04.cpp)
+
+add_executable(Ex14_10 Examples/Chapter14/Ex14_10/Ex14_10.cpp)
