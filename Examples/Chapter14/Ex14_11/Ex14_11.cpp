@@ -14,6 +14,7 @@ int main() {
 
     std::vector<Vessel *> vessels{&box, &can, &carton, &hardcase};
 
-    for (const auto *vessel: vessels)
+    for (const auto *vessel: vessels) {
         std::cout << "Volume is " << vessel->volume() << std::endl;
+    }
 }
