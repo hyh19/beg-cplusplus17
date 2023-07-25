@@ -28,7 +28,10 @@ add_executable(Ex14_10 Examples/Chapter14/Ex14_10/Ex14_10.cpp)
 # 14.4.2 用作接口的抽象类
 add_executable(Ex14_11 Examples/Chapter14/Ex14_11/Ex14_11.cpp)
 
+# 17.2 移动对象
 add_executable(Ex17_01 Examples/Chapter17/Ex17_01/Ex17_01.cpp)
+# 17.2.2 定义移动成员
 add_executable(Ex17_02 Examples/Chapter17/Ex17_02/Ex17_02.cpp)
 add_executable(Ex17_03 Examples/Chapter17/Ex17_03/Ex17_03.cpp)
+# 17.3 显式移动对象
 add_executable(Ex17_04 Examples/Chapter17/Ex17_04/Ex17_04.cpp)
