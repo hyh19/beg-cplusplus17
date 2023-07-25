@@ -35,3 +35,5 @@ add_executable(Ex17_02 Examples/Chapter17/Ex17_02/Ex17_02.cpp)
 add_executable(Ex17_03 Examples/Chapter17/Ex17_03/Ex17_03.cpp)
 # 17.3 显式移动对象
 add_executable(Ex17_04 Examples/Chapter17/Ex17_04/Ex17_04.cpp)
+add_executable(Ex17_05 Examples/Chapter17/Ex17_05/Ex17_05.cpp)
+add_executable(Ex17_06 Examples/Chapter17/Ex17_06/Ex17_06.cpp)
